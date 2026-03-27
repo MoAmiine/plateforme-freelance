@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('avis', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('mission_id')->constrained()->cascadeOnDelete();
+
+            $table->foreignId('auteur_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('destinataire_id')->constrained('users')->cascadeOnDelete();
+
+            $table->integer('note');
+            $table->text('commentaire')->nullable();
+
             $table->timestamps();
         });
     }

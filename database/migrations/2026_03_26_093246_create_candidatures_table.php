@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('candidatures', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('mission_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('freelance_id')->constrained('users')->cascadeOnDelete();
+
+            $table->text('lettre_motivation');
+            $table->decimal('tarif_propose', 8, 2);
+
+            $table->enum('statut', ['en_attente', 'acceptee', 'refusee'])->default('en_attente');
+
             $table->timestamps();
         });
     }
